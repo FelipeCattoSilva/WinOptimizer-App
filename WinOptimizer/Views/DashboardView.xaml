@@ -1,0 +1,131 @@
+<UserControl x:Class="WinOptimizer.Views.DashboardView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:l="clr-namespace:WinOptimizer">
+    <StackPanel>
+        <!-- metric cards -->
+        <UniformGrid Columns="5" Margin="0,0,0,16">
+            <UniformGrid.Resources>
+                <Style TargetType="Border" BasedOn="{StaticResource Card}">
+                    <Setter Property="Margin" Value="0,0,12,0" />
+                    <Setter Property="Padding" Value="16" />
+                </Style>
+            </UniformGrid.Resources>
+
+            <Border>
+                <StackPanel>
+                    <Grid>
+                        <TextBlock Text="{l:Tr dash_cpu}" FontSize="13" Foreground="{DynamicResource MutedForegroundBrush}" />
+                        <TextBlock Text="8 núcleos" FontSize="11" FontFamily="{DynamicResource MonoFont}"
+                                   Foreground="{DynamicResource MutedForegroundBrush}" HorizontalAlignment="Right" />
+                    </Grid>
+                    <StackPanel Orientation="Horizontal" Margin="0,8,0,0" VerticalAlignment="Bottom">
+                        <TextBlock x:Name="CpuVal" Text="0" FontSize="30" FontWeight="SemiBold" FontFamily="{DynamicResource MonoFont}" />
+                        <TextBlock Text="%" FontSize="13" Foreground="{DynamicResource MutedForegroundBrush}" VerticalAlignment="Bottom" Margin="2,0,0,6" />
+                    </StackPanel>
+                    <Polyline x:Name="CpuLine" Height="44" Stretch="None" StrokeThickness="1.5"
+                              Stroke="{DynamicResource PrimaryBrush}" Margin="0,6,0,0" />
+                </StackPanel>
+            </Border>
+
+            <Border>
+                <StackPanel>
+                    <Grid>
+                        <TextBlock Text="{l:Tr dash_mem}" FontSize="13" Foreground="{DynamicResource MutedForegroundBrush}" />
+                        <TextBlock Text="16 GB" FontSize="11" FontFamily="{DynamicResource MonoFont}"
+                                   Foreground="{DynamicResource MutedForegroundBrush}" HorizontalAlignment="Right" />
+                    </Grid>
+                    <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
+                        <TextBlock x:Name="RamVal" Text="0" FontSize="30" FontWeight="SemiBold" FontFamily="{DynamicResource MonoFont}" />
+                        <TextBlock Text="%" FontSize="13" Foreground="{DynamicResource MutedForegroundBrush}" VerticalAlignment="Bottom" Margin="2,0,0,6" />
+                    </StackPanel>
+                    <Polyline x:Name="RamLine" Height="44" Stretch="None" StrokeThickness="1.5"
+                              Stroke="{DynamicResource SuccessBrush}" Margin="0,6,0,0" />
+                </StackPanel>
+            </Border>
+
+            <Border>
+                <StackPanel>
+                    <Grid>
+                        <TextBlock Text="{l:Tr dash_disk}" FontSize="13" Foreground="{DynamicResource MutedForegroundBrush}" />
+                        <TextBlock Text="NVMe SSD" FontSize="11" FontFamily="{DynamicResource MonoFont}"
+                                   Foreground="{DynamicResource MutedForegroundBrush}" HorizontalAlignment="Right" />
+                    </Grid>
+                    <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
+                        <TextBlock x:Name="DiskVal" Text="0" FontSize="30" FontWeight="SemiBold" FontFamily="{DynamicResource MonoFont}" />
+                        <TextBlock Text="%" FontSize="13" Foreground="{DynamicResource MutedForegroundBrush}" VerticalAlignment="Bottom" Margin="2,0,0,6" />
+                    </StackPanel>
+                    <Polyline x:Name="DiskLine" Height="44" Stretch="None" StrokeThickness="1.5"
+                              Stroke="{DynamicResource WarningBrush}" Margin="0,6,0,0" />
+                </StackPanel>
+            </Border>
+
+            <Border>
+                <StackPanel>
+                    <Grid>
+                        <TextBlock Text="{l:Tr dash_net}" FontSize="13" Foreground="{DynamicResource MutedForegroundBrush}" />
+                        <TextBlock Text="Wi-Fi 6" FontSize="11" FontFamily="{DynamicResource MonoFont}"
+                                   Foreground="{DynamicResource MutedForegroundBrush}" HorizontalAlignment="Right" />
+                    </Grid>
+                    <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
+                        <TextBlock x:Name="NetVal" Text="0" FontSize="30" FontWeight="SemiBold" FontFamily="{DynamicResource MonoFont}" />
+                        <TextBlock Text="Mbps" FontSize="13" Foreground="{DynamicResource MutedForegroundBrush}" VerticalAlignment="Bottom" Margin="3,0,0,6" />
+                    </StackPanel>
+                    <Polyline x:Name="NetLine" Height="44" Stretch="None" StrokeThickness="1.5"
+                              Stroke="{DynamicResource DestructiveBrush}" Margin="0,6,0,0" />
+                </StackPanel>
+            </Border>
+
+            <Border Margin="0">
+                <StackPanel>
+                    <Grid>
+                        <TextBlock Text="{l:Tr dash_gpu}" FontSize="13" Foreground="{DynamicResource MutedForegroundBrush}" />
+                        <TextBlock x:Name="GpuName" Text="GPU" FontSize="11" FontFamily="{DynamicResource MonoFont}"
+                                   TextTrimming="CharacterEllipsis"
+                                   Foreground="{DynamicResource MutedForegroundBrush}" HorizontalAlignment="Right" MaxWidth="90" />
+                    </Grid>
+                    <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
+                        <TextBlock x:Name="GpuVal" Text="0" FontSize="30" FontWeight="SemiBold" FontFamily="{DynamicResource MonoFont}" />
+                        <TextBlock Text="%" FontSize="13" Foreground="{DynamicResource MutedForegroundBrush}" VerticalAlignment="Bottom" Margin="2,0,0,6" />
+                    </StackPanel>
+                    <Polyline x:Name="GpuLine" Height="44" Stretch="None" StrokeThickness="1.5"
+                              Stroke="#FFB36BFF" Margin="0,6,0,0" />
+                </StackPanel>
+            </Border>
+        </UniformGrid>
+
+        <!-- summary + health -->
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="12" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="0" Style="{StaticResource Card}" Padding="20">
+                <StackPanel>
+                    <TextBlock Text="{l:Tr dash_system_summary}" FontSize="13" FontWeight="SemiBold" Margin="0,0,0,12" />
+                    <UniformGrid x:Name="SummaryGrid" Columns="2" />
+                </StackPanel>
+            </Border>
+
+            <Border Grid.Column="2" Style="{StaticResource Card}" Padding="20">
+                <StackPanel>
+                    <TextBlock Text="{l:Tr dash_health}" FontSize="13" FontWeight="SemiBold" />
+                    <Grid Width="130" Height="130" Margin="0,16,0,0">
+                        <Ellipse Width="130" Height="130" Stroke="{DynamicResource SecondaryBrush}" StrokeThickness="10" />
+                        <Path x:Name="ScoreArc" Stroke="{DynamicResource PrimaryBrush}" StrokeThickness="10"
+                              StrokeStartLineCap="Round" StrokeEndLineCap="Round" />
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <TextBlock x:Name="ScoreValue" Text="0" FontSize="22" FontWeight="SemiBold" FontFamily="{DynamicResource MonoFont}" HorizontalAlignment="Center" />
+                            <TextBlock Text="{l:Tr dash_of100}" FontSize="11" Foreground="{DynamicResource MutedForegroundBrush}" HorizontalAlignment="Center" />
+                        </StackPanel>
+                    </Grid>
+                    <TextBlock x:Name="ScoreSub" TextWrapping="Wrap" TextAlignment="Center" FontSize="12" LineHeight="18" Margin="0,12,0,0"
+                               Foreground="{DynamicResource MutedForegroundBrush}"
+                               Text="" />
+                </StackPanel>
+            </Border>
+        </Grid>
+    </StackPanel>
+</UserControl>
