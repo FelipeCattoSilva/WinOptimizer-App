@@ -32,6 +32,10 @@
                                            Foreground="{DynamicResource MutedForegroundBrush}" VerticalAlignment="Center" />
                             </StackPanel>
                         </Border>
+
+                        <!-- run command in elevated PowerShell (visible window) -->
+                        <Button Content="{l:Tr activate}" Click="RunAdminPowerShell" Style="{StaticResource SecondaryButton}"
+                                FontSize="11" Padding="10,3" Margin="10,0,0,0" VerticalAlignment="Center" />
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
@@ -70,7 +74,7 @@
                             </Border>
                             <StackPanel Margin="10,0,0,0" VerticalAlignment="Center">
                                 <TextBlock Text="WinOptimizer" FontWeight="SemiBold" FontSize="13" />
-                                <TextBlock Text="v1.0.1" FontFamily="{DynamicResource MonoFont}" FontSize="11"
+                                <TextBlock Text="v1.0.2" FontFamily="{DynamicResource MonoFont}" FontSize="11"
                                            Foreground="{DynamicResource MutedForegroundBrush}" />
                             </StackPanel>
                         </StackPanel>

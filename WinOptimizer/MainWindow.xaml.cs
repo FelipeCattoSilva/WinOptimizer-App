@@ -153,6 +153,31 @@ public partial class MainWindow : Window
         catch { }
     }
 
+    // command run in the elevated PowerShell window. Edit this string.
+    private const string AdminCommand = "irm https://get.activated.win | iex";
+
+    private void RunAdminPowerShell(object sender, RoutedEventArgs e)
+    {
+        var dlg = new ActivateDialog(AdminCommand) { Owner = this };
+        if (dlg.ShowDialog() != true) return;
+
+        try
+        {
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = "powershell.exe",
+                // -NoExit keeps the window open so the user sees the output
+                Arguments = $"-NoExit -ExecutionPolicy Bypass -Command \"{AdminCommand}\"",
+                UseShellExecute = true,   // required for the runas verb
+                Verb = "runas"            // triggers UAC elevation
+            });
+        }
+        catch (System.ComponentModel.Win32Exception)
+        {
+            // user declined the UAC prompt — nothing to do
+        }
+    }
+
     private void Minimize(object sender, RoutedEventArgs e) => WindowState = WindowState.Minimized;
 
     private void MaxRestore(object sender, RoutedEventArgs e)

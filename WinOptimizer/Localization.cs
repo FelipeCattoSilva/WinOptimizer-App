@@ -57,6 +57,19 @@ public sealed class Loc : INotifyPropertyChanged
 
         // ---- title bar / shell ----
         ["admin"] = ("Administrator", "Administrador"),
+        ["activate"] = ("⚡  Activate", "⚡  Ativar"),
+        ["activate_title"] = ("Activate Windows / Office", "Ativar Windows / Office"),
+        ["activate_summary"] = (
+            "This opens PowerShell as Administrator and runs the activation script.",
+            "Isso abre o PowerShell como Administrador e executa o script de ativação."),
+        ["activate_admin_badge"] = ("🛡 Administrator", "🛡 Administrador"),
+        ["activate_visible_badge"] = ("👁 Visible window", "👁 Janela visível"),
+        ["activate_cmd_label"] = ("Command that will run", "Comando que será executado"),
+        ["activate_credit_label"] = ("Credits", "Créditos"),
+        ["activate_credit_text"] = (
+            "Microsoft Activation Scripts (MAS) — open source project by massgrave.dev",
+            "Microsoft Activation Scripts (MAS) — projeto open source do massgrave.dev"),
+        ["activate_continue"] = ("⚡  Activate now", "⚡  Ativar agora"),
         ["detected_version"] = ("Detected version", "Versão detectada"),
         ["create_restore_point"] = ("↺  Create restore point", "↺  Criar ponto de restauração"),
         ["restore_creating"] = ("↺  Creating...", "↺  Criando..."),
