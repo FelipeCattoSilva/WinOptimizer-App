@@ -3,8 +3,24 @@ using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media;
 using WinOptimizer.Models;
+using WinOptimizer.Services;
 
 namespace WinOptimizer;
+
+public class LogLevelBrushConverter : IValueConverter
+{
+    public object Convert(object value, Type t, object p, CultureInfo c) => value switch
+    {
+        LogLevel.Action => Res.B("PrimaryBrush"),
+        LogLevel.Exec => Res.B("ForegroundBrush"),
+        LogLevel.Reg => Res.B("AccentBrush"),
+        LogLevel.Result => Res.B("SuccessBrush"),
+        LogLevel.Warn => Res.B("WarningBrush"),
+        LogLevel.Error => Res.B("DestructiveBrush"),
+        _ => Res.B("MutedForegroundBrush")
+    };
+    public object ConvertBack(object v, Type t, object p, CultureInfo c) => Binding.DoNothing;
+}
 
 static class Res
 {

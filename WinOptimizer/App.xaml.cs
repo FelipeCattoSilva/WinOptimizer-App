@@ -28,8 +28,13 @@ public partial class App : Application
     {
         if (e.PropertyName != nameof(TweakItem.Ativo) || sender is not TweakItem t) return;
         bool ativo = t.Ativo;
+        Log.Action($"{(ativo ? "Enable" : "Disable")} → {t.Titulo}  [{t.Id}]");
         // keep registry/service/powercfg work off the ui thread
-        Task.Run(() => { try { TweakService.Apply(t, ativo); } catch { } });
+        Task.Run(() =>
+        {
+            try { TweakService.Apply(t, ativo); }
+            catch (Exception ex) { Log.Error($"{t.Id}: {ex.Message}"); }
+        });
     }
 
     // win11 = build >= 22000, anything lower is treated as win10

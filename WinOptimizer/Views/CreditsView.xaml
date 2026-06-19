@@ -34,7 +34,7 @@
         <Border Style="{StaticResource Card}" Padding="16" Margin="0,8,0,0">
             <Grid>
                 <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center">
-                    <TextBlock Text="WinOptimizer v1.0.1" FontSize="14" FontWeight="SemiBold" />
+                    <TextBlock Text="WinOptimizer v1.0.3" FontSize="14" FontWeight="SemiBold" />
                     <TextBlock Text="{l:Tr credits_footer}"
                                FontSize="13" Foreground="{DynamicResource MutedForegroundBrush}" Margin="0,6,0,0" TextWrapping="Wrap" />
                 </StackPanel>

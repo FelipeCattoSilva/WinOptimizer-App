@@ -74,7 +74,7 @@
                             </Border>
                             <StackPanel Margin="10,0,0,0" VerticalAlignment="Center">
                                 <TextBlock Text="WinOptimizer" FontWeight="SemiBold" FontSize="13" />
-                                <TextBlock Text="v1.0.2" FontFamily="{DynamicResource MonoFont}" FontSize="11"
+                                <TextBlock Text="v1.0.3" FontFamily="{DynamicResource MonoFont}" FontSize="11"
                                            Foreground="{DynamicResource MutedForegroundBrush}" />
                             </StackPanel>
                         </StackPanel>
@@ -97,6 +97,8 @@
                                          GroupName="nav" Checked="Nav_Checked" Content="{l:Tr nav_services}" />
                             <RadioButton Style="{StaticResource NavItem}" Tag="debloat"
                                          GroupName="nav" Checked="Nav_Checked" Content="{l:Tr nav_debloat}" />
+                            <RadioButton Style="{StaticResource NavItem}" Tag="logs"
+                                         GroupName="nav" Checked="Nav_Checked" Content="{l:Tr nav_logs}" />
                             <RadioButton Style="{StaticResource NavItem}" Tag="creditos"
                                          GroupName="nav" Checked="Nav_Checked" Content="{l:Tr nav_credits}" />
                         </StackPanel>
@@ -135,6 +137,7 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
 
                     <!-- section header -->
@@ -203,6 +206,66 @@
                     <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Padding="24,20">
                         <ContentControl x:Name="ContentHost" />
                     </ScrollViewer>
+
+                    <!-- ============ always-visible live log dock ============ -->
+                    <Border Grid.Row="2" Background="{DynamicResource CardBrush}"
+                            BorderBrush="{DynamicResource BorderBrush}" BorderThickness="0,1,0,0">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <!-- dock header -->
+                            <Grid Grid.Row="0" Margin="16,8">
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                    <TextBlock Text="📜" FontSize="12" VerticalAlignment="Center" />
+                                    <TextBlock Text="{l:Tr log_dock_title}" FontSize="12" FontWeight="Medium" Margin="6,0,0,0" VerticalAlignment="Center" />
+                                    <Border Margin="8,0,0,0" CornerRadius="8" Padding="6,1" Background="{DynamicResource SecondaryBrush}">
+                                        <TextBlock x:Name="LogDockCount" Text="0" FontSize="10" FontFamily="{DynamicResource MonoFont}"
+                                                   Foreground="{DynamicResource MutedForegroundBrush}" VerticalAlignment="Center" />
+                                    </Border>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                                    <Button x:Name="LogDockCopy" Content="{l:Tr log_copy}" Click="LogDockCopyClick" Style="{StaticResource SecondaryButton}"
+                                            FontSize="11" Padding="8,2" Margin="0,0,6,0" />
+                                    <Button Content="{l:Tr log_clear}" Click="LogDockClear" Style="{StaticResource SecondaryButton}"
+                                            FontSize="11" Padding="8,2" Margin="0,0,6,0" />
+                                    <Button x:Name="LogDockToggle" Content="▾" Click="LogDockToggleClick" Style="{DynamicResource ChromeButton}" />
+                                </StackPanel>
+                            </Grid>
+
+                            <!-- dock body -->
+                            <Border x:Name="LogDockBody" Grid.Row="1" Height="150" BorderBrush="{DynamicResource BorderBrush}" BorderThickness="0,1,0,0">
+                                <Grid>
+                                    <TextBlock x:Name="LogDockEmpty" Text="{l:Tr log_empty}" FontSize="12" Margin="16,12"
+                                               Foreground="{DynamicResource MutedForegroundBrush}" />
+                                    <ScrollViewer x:Name="LogDockScroller" VerticalScrollBarVisibility="Auto" Padding="14,8">
+                                        <ItemsControl x:Name="LogDockList">
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Grid Margin="0,1">
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="Auto" />
+                                                            <ColumnDefinition Width="Auto" />
+                                                            <ColumnDefinition Width="*" />
+                                                        </Grid.ColumnDefinitions>
+                                                        <TextBlock Grid.Column="0" Text="{Binding TimeText}" FontFamily="{DynamicResource MonoFont}"
+                                                                   FontSize="11" Foreground="{DynamicResource MutedForegroundBrush}" />
+                                                        <TextBlock Grid.Column="1" Text="{Binding LevelText}" FontFamily="{DynamicResource MonoFont}"
+                                                                   FontSize="11" FontWeight="SemiBold" Width="40" Margin="10,0,8,0"
+                                                                   Foreground="{Binding Level, Converter={StaticResource LogBrush}}" />
+                                                        <TextBlock Grid.Column="2" Text="{Binding Text}" FontFamily="{DynamicResource MonoFont}"
+                                                                   FontSize="11" TextTrimming="CharacterEllipsis" Foreground="{DynamicResource ForegroundBrush}" />
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
+                                    </ScrollViewer>
+                                </Grid>
+                            </Border>
+                        </Grid>
+                    </Border>
                 </Grid>
             </Grid>
         </Grid>

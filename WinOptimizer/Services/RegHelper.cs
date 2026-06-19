@@ -22,6 +22,7 @@ public static class RegHelper
 
     public static void SetDword(string path, string name, int value)
     {
+        Log.Reg($"set {path}\\{name} = {value} (DWORD)");
         var (root, sub) = Split(path);
         using var k = root.CreateSubKey(sub, true);
         k.SetValue(name, value, RegistryValueKind.DWord);
@@ -29,6 +30,7 @@ public static class RegHelper
 
     public static void SetString(string path, string name, string value)
     {
+        Log.Reg($"set {path}\\{name} = \"{value}\" (String)");
         var (root, sub) = Split(path);
         using var k = root.CreateSubKey(sub, true);
         k.SetValue(name, value, RegistryValueKind.String);
@@ -46,6 +48,7 @@ public static class RegHelper
 
     public static void DeleteValue(string path, string name)
     {
+        Log.Reg($"delete {path}\\{name}");
         var (root, sub) = Split(path);
         using var k = root.OpenSubKey(sub, true);
         try { k?.DeleteValue(name, false); } catch { }
@@ -53,12 +56,14 @@ public static class RegHelper
 
     public static void DeleteKey(string path)
     {
+        Log.Reg($"delete key {path}");
         var (root, sub) = Split(path);
         try { root.DeleteSubKeyTree(sub, false); } catch { }
     }
 
     public static void CreateKey(string path)
     {
+        Log.Reg($"create key {path}");
         var (root, sub) = Split(path);
         using var _ = root.CreateSubKey(sub, true);
     }

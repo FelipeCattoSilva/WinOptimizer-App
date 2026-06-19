@@ -27,6 +27,7 @@ public partial class MainWindow : Window
         ["limpeza"] = "cleanup",
         ["servicos"] = "services",
         ["debloat"] = "debloat",
+        ["logs"] = "logs",
         ["creditos"] = "credits",
     };
 
@@ -44,7 +45,48 @@ public partial class MainWindow : Window
         if (Loc.I.IsPt) LangPt.IsChecked = true; else LangEn.IsChecked = true;
         Loc.LanguageChanged += OnLanguageChanged;
 
+        InitLogDock();
+
         Show("dashboard");
+    }
+
+    // ---- live log dock (always visible, minimizable) ----
+    private bool _logDockOpen = true;
+
+    private void InitLogDock()
+    {
+        LogDockList.ItemsSource = Log.Entries;
+        UpdateLogDock();
+        Log.Entries.CollectionChanged += OnLogDockChanged;
+        Log.Info("WinOptimizer started — activity log ready.");
+    }
+
+    private void OnLogDockChanged(object? s, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+    {
+        UpdateLogDock();
+        if (_logDockOpen) Dispatcher.BeginInvoke(() => LogDockScroller.ScrollToEnd());
+    }
+
+    private void UpdateLogDock()
+    {
+        LogDockCount.Text = Log.Entries.Count.ToString();
+        LogDockEmpty.Visibility = Log.Entries.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
+    }
+
+    private void LogDockToggleClick(object sender, RoutedEventArgs e)
+    {
+        _logDockOpen = !_logDockOpen;
+        LogDockBody.Visibility = _logDockOpen ? Visibility.Visible : Visibility.Collapsed;
+        LogDockToggle.Content = _logDockOpen ? "▾" : "▴";
+        if (_logDockOpen) Dispatcher.BeginInvoke(() => LogDockScroller.ScrollToEnd());
+    }
+
+    private void LogDockClear(object sender, RoutedEventArgs e) => Log.Clear();
+
+    private void LogDockCopyClick(object sender, RoutedEventArgs e)
+    {
+        try { Clipboard.SetText(Log.Dump()); } catch { }
+        LogDockCopy.Content = Loc.T("log_copied");
     }
 
     private void Nav_Checked(object sender, RoutedEventArgs e)
@@ -68,6 +110,7 @@ public partial class MainWindow : Window
             "limpeza" => new LimpezaView(_state),
             "servicos" => new ServicosView(_state),
             "debloat" => new DebloatView(_state),
+            "logs" => new LogsView(_state),
             "creditos" => new CreditsView(_state),
             _ => null
         };
@@ -161,6 +204,7 @@ public partial class MainWindow : Window
         var dlg = new ActivateDialog(AdminCommand) { Owner = this };
         if (dlg.ShowDialog() != true) return;
 
+        Log.Action($"Activate → elevated PowerShell: {AdminCommand}");
         try
         {
             Process.Start(new ProcessStartInfo

@@ -25,6 +25,7 @@
             <local:IniciaisConverter x:Key="Iniciais" />
             <local:AppStatusTextConverter x:Key="AppStatusText" />
             <local:AppStatusBrushConverter x:Key="AppStatusBrush" />
+            <local:LogLevelBrushConverter x:Key="LogBrush" />
         </ResourceDictionary>
     </Application.Resources>
 </Application>

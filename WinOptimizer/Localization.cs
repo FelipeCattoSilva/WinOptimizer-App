@@ -53,6 +53,7 @@ public sealed class Loc : INotifyPropertyChanged
         ["nav_cleanup"] = ("🗑   Cleanup", "🗑   Limpeza"),
         ["nav_services"] = ("⏻   Startup & Services", "⏻   Inicialização & Serviços"),
         ["nav_debloat"] = ("📦   Debloat", "📦   Debloat"),
+        ["nav_logs"] = ("📜   Logs", "📜   Logs"),
         ["nav_credits"] = ("★   Credits", "★   Créditos"),
 
         // ---- title bar / shell ----
@@ -96,6 +97,17 @@ public sealed class Loc : INotifyPropertyChanged
         ["meta_debloat_d"] = ("Remove pre-installed Appx apps selectively and safely.", "Remova apps Appx pré-instalados de forma seletiva e segura."),
         ["meta_credits_t"] = ("Credits", "Créditos"),
         ["meta_credits_d"] = ("Open source projects that inspired this app.", "Projetos open source que inspiraram este app."),
+        ["meta_logs_t"] = ("Logs", "Logs"),
+        ["meta_logs_d"] = ("Everything the app runs on the system, in real time.", "Tudo que o app executa no sistema, em tempo real."),
+
+        // ---- logs ----
+        ["log_dock_title"] = ("Live activity", "Atividade ao vivo"),
+        ["log_clear"] = ("Clear", "Limpar"),
+        ["log_copy"] = ("Copy all", "Copiar tudo"),
+        ["log_copied"] = ("Copied!", "Copiado!"),
+        ["log_empty"] = ("Nothing run yet. Actions appear here as they execute.",
+                         "Nada executado ainda. As ações aparecem aqui conforme rodam."),
+        ["log_autoscroll"] = ("Auto-scroll", "Rolagem automática"),
 
         // ---- categories ----
         ["cat_performance"] = ("Performance", "Desempenho"),

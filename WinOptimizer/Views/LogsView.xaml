@@ -1,0 +1,43 @@
+<UserControl x:Class="WinOptimizer.Views.LogsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:l="clr-namespace:WinOptimizer">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- toolbar -->
+        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,0,12">
+            <CheckBox x:Name="AutoScroll" Style="{StaticResource ToggleSwitch}" IsChecked="True"
+                      VerticalAlignment="Center" Margin="0,0,8,0" />
+            <TextBlock Text="{l:Tr log_autoscroll}" FontSize="12" VerticalAlignment="Center" Margin="0,0,16,0"
+                       Foreground="{DynamicResource MutedForegroundBrush}" />
+            <Button x:Name="CopyBtn" Content="{l:Tr log_copy}" Style="{StaticResource SecondaryButton}"
+                    FontSize="12" Margin="0,0,8,0" Click="CopyAll" />
+            <Button Content="{l:Tr log_clear}" Style="{StaticResource SecondaryButton}"
+                    FontSize="12" Click="ClearAll" />
+        </StackPanel>
+
+        <!-- log surface (read-only, selectable, keeps colors) -->
+        <Border Grid.Row="1" CornerRadius="10" Background="{DynamicResource CardBrush}"
+                BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1" Padding="4">
+            <Grid>
+                <TextBlock x:Name="EmptyState" Text="{l:Tr log_empty}" FontSize="13" Margin="14"
+                           Foreground="{DynamicResource MutedForegroundBrush}" />
+                <RichTextBox x:Name="LogBox" IsReadOnly="True" IsDocumentEnabled="True" BorderThickness="0"
+                             Background="Transparent" Foreground="{DynamicResource ForegroundBrush}"
+                             FontFamily="{DynamicResource MonoFont}" FontSize="12" Padding="10,8"
+                             VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"
+                             SelectionBrush="{DynamicResource PrimaryBrush}">
+                    <RichTextBox.Resources>
+                        <Style TargetType="Paragraph">
+                            <Setter Property="Margin" Value="0" />
+                        </Style>
+                    </RichTextBox.Resources>
+                </RichTextBox>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>
